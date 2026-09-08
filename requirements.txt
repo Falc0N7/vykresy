@@ -1,0 +1,27 @@
+# Production závislosti — ověřeno 2026-09-06 vůči main.py, gui.py, ocr_engine.py, parser.py, config.py
+# Python 3.10+ (vyžadováno pro `X | Y` typy a `list[...]` anotace)
+# Instalace: pip install -r requirements.txt
+# Pozn.: První spuštění aplikace nainstaluje závislosti automaticky (main.py bootstrap).
+# Pro offline nasazení zkopírujte celý adresář včetně nainstalovaných balíků nebo použijte `pip download`.
+
+# --- Core AI / Compute ---
+torch>=2.0.0,<3               # cuda/cpu backend, kvantizace — ocr_engine.py, config.py
+torchvision>=0.15.0            # závislost torch / easyocr
+transformers>=4.44,<6         # AutoProcessor, AutoModelForImageTextToText — ocr_engine.py
+huggingface_hub>=0.25.0      # snapshot_download pro auto-download modelu — ocr_engine.py
+einops>=0.7.0                # závislost transformers/SmolVLM
+accelerate>=0.25.0           # urychlení transformers
+onnxruntime>=1.16            # backend pro rapidocr_onnxruntime
+
+# --- OCR ---
+rapidocr_onnxruntime>=1.2.0  # primární OCR (onnxruntime CPU) — ocr_engine.py
+opencv-python-headless>=4.8.0  # CLAHE pro vybledlé skeny — ocr_engine.py (headless = bez Qt/GTK)
+# easyocr>=1.7.0             # volitelný fallback OCR (~500 MB) — odkomentujte pokud chcete
+
+# --- Obraz / Data ---
+numpy>=1.24.0                # np.asarray pro OCR — ocr_engine.py
+Pillow>=10.0.0               # PIL.Image, ImageOps, ImageEnhance — gui.py, ocr_engine.py
+openpyxl>=3.1.0              # Excel export seznam_vykresu.xlsx — gui.py
+
+# --- Volitelné (GPU quantization) ---
+# bitsandbytes>=0.43          # 4-bit quantization pro <6GB VRAM GPU — ocr_engine.py (nefunguje na Windows bez CUDA toolkit)

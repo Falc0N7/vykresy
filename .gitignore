@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.env
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Logs & runtime (generováno za běhu, nepatří do repo ani do produkčního ZIPu)
+rename_drawings.log
+rename_drawings.log.*
+*.log
+config.json
+
+# Session / undo (per-složka runtime stav, nepatří do repo)
+session_checkpoint.json
+session_checkpoint.json.*
+undo_backup.json
+undo_backup_*.json
+
+# Excel export ve složkách s výkresy (generováno automaticky)
+seznam_vykresu*.xlsx
+
+# Modely – lokální váhy (1+ GB, stahují se automaticky při prvním spuštění)
+models/hub/
+models/modules/
+models/xet/
+models/HuggingFaceTB/
+models/**/*.bin
+models/**/*.safetensors
+models/**/*.onnx
+models/**/*.pt
+models/**/*.ckpt
+models/CACHEDIR.TAG
+!models/.gitkeep
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test / temp (Vykresy jsou testovací data, nepatří do produkce ani do repo)
+.pytest_cache/
+.tmp/
+tmp/
+Vykresy/
+Vykresy/seznam_*.xlsx
